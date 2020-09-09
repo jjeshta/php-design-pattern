@@ -24,7 +24,8 @@ class NonVeg extends Burger
     }
 }
 
-// Builder Interface
+// Builder Interface provide methods for preparing the builder
+// method getFood() will return the final object (burger)
 interface BurgerBuilder
 {
     public function addPatty();
@@ -101,9 +102,12 @@ class NonVegBurgerBuilder implements BurgerBuilder
 }
 
 
-// Director
+// Director 
+// Final piece is the director class 
 class BurgerCreator
 {
+  // buildBurger's main responsibility of the director is to get a builder interface and
+  // call the builder methods then retrieve the object.
     public function buildBurger(BurgerBuilder $builder)
     {
         $builder->addPatty();
@@ -115,8 +119,10 @@ class BurgerCreator
 }
 
 
+//Create a director instance
 $creator = new BurgerCreator();
 
+//initialize our concreteBuilders
 $nonvegbuilder = new NonVegBurgerBuilder([
     'patty' => 'Chicken',
     'cheese' => 'Mozarella 2 slices',
@@ -129,6 +135,7 @@ $vegbuilder = new VegBurgerBuilder([
     'tomato' => 2,
 ]);
 
+//lastly build our burgers
 $b = $creator->buildBurger($vegbuilder);
 $b1 = $creator->buildBurger($nonvegbuilder);
 
