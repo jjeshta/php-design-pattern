@@ -1,5 +1,6 @@
 <?php
 
+//defines all methods a vehicle should have
 interface IVehicle {
     public function setMake($param);
     public function setModel($param);
@@ -13,6 +14,7 @@ class Vehicle {
     public $vehicleType;
 }
 
+//Concrete vehicle that implements IVehicle interface
 class Car implements IVehicle {
     private $vehicle;
 
@@ -37,6 +39,7 @@ class Car implements IVehicle {
     }
 }
 
+////Concrete vehicle that implements IVehicle interface
 class Ship implements IVehicle {
     private $vehicle;
 
@@ -61,6 +64,7 @@ class Ship implements IVehicle {
     }
 }
 
+//vehicleFactory class which creates the vehicle of type car or ship.
 class VehicleFactory{
     public function create($class, $vehicle)
     {
@@ -68,13 +72,17 @@ class VehicleFactory{
     }
 }
 
+
+// Client 
 $vehicleFactory = new VehicleFactory;
 
+//Created a vehicle object and set its attributes
 $motorCar = new Vehicle;
 $motorCar->make = "Toyota";
 $motorCar->model = "Corolla";
 $motorCar->vehicleType = "Sedan";
 
+//Use vehicleFactory to create a Car object with the vehicle object
 $car = $vehicleFactory->create("Car", $motorCar);
 echo $car->getVehicle();
 
