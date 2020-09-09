@@ -1,4 +1,17 @@
 <?php
+/**
+Target: ipayHub interface defines two methods addPrice() and addItem()
+Concrete Prototype: payHub (implements ipayHub) and payMeant2payHubAdapter
+Adapter: payMeant2payHubAdapter
+Adaptee: payMeant
+
+Problem statement:
+customer can buy item and pay with payHub as buy() takes in parameters iPayHub iterface.
+therefore if customer buy items and pay with payMeant then errors will occur.
+so we need to adapt payMeant as
+payMeant offers the same functionality but through a different interface( addOneItem() and  addPriceToTotal())
+**/
+
 class Customer {
     private $pay;
        
@@ -48,10 +61,13 @@ class PayMeant {
     }
 }
 
+//The adapter pattern essentially wraps the old class's methods with the new class's method's names, and does so by:
+//Implementing the old class's interface for the names of the adapter's methods.
+//Holding a reference to the new class, and using the new class's methods as the adapter's methods bodies.
 class PayMeant2PayHubAdapter implements PayHub {
     // The adapter holds a reference to the new class.
     private $payObj;
-    
+
     // In order to hold a reference, we need to pass the new 
     //   class's object throught the constructor.
     function __construct($payObj)
@@ -71,7 +87,7 @@ class PayMeant2PayHubAdapter implements PayHub {
     }
 }
 
-$payKal = new PayMeant();
-$pay = new PayMeant2PayHubAdapter($payKal);
+$payMeant = new PayMeant();
+$pay = new PayMeant2PayHubAdapter($payMeant);
 $customer = new Customer($pay);
 $customer -> buy("lollipop", 2);
