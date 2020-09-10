@@ -6,7 +6,7 @@ Adapter: payMeant2payHubAdapter
 Adaptee: payMeant
 
 Problem statement:
-customer can buy item and pay with payHub as buy() takes in parameters iPayHub iterface.
+customer can buy item and pay with payHub as buy() takes in parameters iPayHub.
 therefore if customer buy items and pay with payMeant then errors will occur.
 so we need to adapt payMeant as
 payMeant offers the same functionality but through a different interface( addOneItem() and  addPriceToTotal())
@@ -32,6 +32,7 @@ interface PayHub {
     function addPrice($itemPrice);
 }
 
+//Concrete prototype
 class PayWithPayHub implements PayHub {
     function addItem($itemName) {
         var_dump("1 item added: " . $itemName );
@@ -42,6 +43,7 @@ class PayWithPayHub implements PayHub {
     }
 }
 
+//Adaptee
 class PayMeant {
     function addOneItem($name)
     {
